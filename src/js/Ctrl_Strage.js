@@ -112,6 +112,7 @@ var Store = assign({}, EventEmitter.prototype, {
 		},"*");
 	},
 	Load:function(){
+		/*
 		chrome.storage.local.get(null,function(items){
 			//console.log(items);
 			if(location.pathname == "/www/ChromeAppLogin.html"){
@@ -126,6 +127,7 @@ var Store = assign({}, EventEmitter.prototype, {
 				Store.emitChangeSavedData();
 			}
 		});
+		*/
 	},
 	SaveFromSandBox:function(key, value){
 		// 親に save 送信
