@@ -21189,10 +21189,10 @@ var Store = assign({}, EventEmitter.prototype, {
 				var sandbox = document.getElementById("Sandbox").contentWindow;
 				sandbox.postMessage({
 					command:"loaded",
-					option:{values:items}
+					option:{values:value}
 				},"*")
 			}else{
-				_store.savedValues = items;
+				_store.savedValues = value;
 				Store.emitChangeSavedData();
 			}
 		});
