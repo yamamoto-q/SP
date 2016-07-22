@@ -8,15 +8,10 @@ module.exports = function(grunt) {
                     { expand: true, cwd: 'src/css/lib/', src: ['*.css'], dest: 'www/css', filter: 'isFile' }
                 ],
             },
-            QuestetraLib: {
+            modules: {
                 files: [
-                    // https://github.com/yamamoto-q/Questetra をコピーする
-                    { expand: true, cwd: 'src/js/submodules/Questetra/', src: ['*.js'], dest: 'src/js', filter: 'isFile' }
-                ]
-            },
-            ReactLayoutElem: {
-                files: [
-                    // https://github.com/yamamoto-q/Questetra をコピーする
+                    { expand: true, cwd: 'src/js/submodules/Questetra/', src: ['*.js'], dest: 'src/js', filter: 'isFile' },
+                    { expand: true, cwd: 'src/js/submodules/WebAppLib/dist/', src: ['*.js'], dest: 'src/js', filter: 'isFile' },
                     { expand: true, cwd: 'src/js/submodules/ReactLayoutElem/dist/', src: ['*.js'], dest: 'src/js', filter: 'isFile' }
                 ]
             },
