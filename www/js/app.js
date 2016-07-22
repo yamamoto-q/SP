@@ -21058,7 +21058,7 @@ var Ctrl_Strage = require('./Ctrl_Strage.js');
 Ctrl_Strage.Store.addChangeSavedDataListener(function(){
 	var SavedValue = Ctrl_Strage.Store.getSavedValue();
 	var qUsers = [];
-	if(typeof SavedValue.qUsers !== "undefined"){
+	if(SavedValue && typeof SavedValue !== "undefined" && typeof SavedValue.qUsers !== "undefined"){
 		qUser = SavedValue.qUsers;
 	}
 
