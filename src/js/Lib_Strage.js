@@ -4,7 +4,7 @@ module.exports = {
         if (typeof chrome !== "undefined") {
             // Chorome　の場合
             var saveObj = {};
-            saveObj[key] = value;
+            saveObj[keygi] = value;
 
             chrome.storage.local.set(saveObj, function() {
                 cb();
