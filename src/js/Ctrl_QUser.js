@@ -28,6 +28,7 @@ module.exports = {
 }
 
 //
+/*
 var Ctrl_Strage = require('./Ctrl_Strage.js');
 
 Ctrl_Strage.Store.addChangeSavedDataListener(function(){
@@ -40,4 +41,7 @@ Ctrl_Strage.Store.addChangeSavedDataListener(function(){
 	_store.qUsers = qUsers;
 	Store.emitQUsersChange();
 });
-Ctrl_Strage.Action.load();
+
+console.log('Ctrl_Strage.Action.load("qUser");');
+Ctrl_Strage.Action.load("qUser");
+*/

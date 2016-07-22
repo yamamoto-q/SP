@@ -11,6 +11,7 @@ module.exports = React.createClass({
 	displayName: 'exports',
 
 	getInitialState: function getInitialState() {
+		// User取得
 		var qUsers = Ctrl_QUser.Store.getQUsers();
 		console.log("init");
 		console.log(qUsers);
@@ -23,6 +24,7 @@ module.exports = React.createClass({
 		Ctrl_QUser.Store.addQUsersChangeListener(function () {
 			console.log('addQUsersChangeListener');
 			var qUsers = Ctrl_QUser.Store.getQUsers();
+
 			console.log(qUsers);
 			if (self.isMounted()) {
 				self.setState({
@@ -30,8 +32,6 @@ module.exports = React.createClass({
 				});
 			}
 		});
-
-		//ModelsCtrl.Action.getAllProcessModelInfos();
 	},
 	render: function render() {
 		return React.createElement(

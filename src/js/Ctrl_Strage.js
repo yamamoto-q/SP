@@ -16,16 +16,16 @@ var dispatcher = {
 }
 
 var Action = {
-	load:function(){
+	load:function(key){
 		if(location.pathname == "/www/sandbox.html"){
 			dispatcher.getInstance().dispatch({
 				actionType: "LoadFromSandBox",
-				value:{}
+				value:{key:key}
 			});
 		}else{
 			dispatcher.getInstance().dispatch({
 				actionType: "Load",
-				value:{}
+				value:{key:key}
 			});
 		}
 	},
@@ -60,7 +60,7 @@ if(location.pathname == "/www/ChromeAppLogin.html"){
 		var command = event.data.command;
 		switch (command){
 			case "load":
-				Store.Load();
+				Store.Load(event.data.option.key);
 				break;
 			case "save":
 				// 子から保存要請を受信
@@ -107,15 +107,15 @@ var Store = assign({}, EventEmitter.prototype, {
 	emitChangeSavedData:function(){
 		this.emit(EVENT.LOADED);
 	},
-	LoadFromSandBox:function(){
+	LoadFromSandBox:function(key){
 		parent.postMessage({
 			command:"load",
-			option:{}
+			option:{key:key}
 		},"*");
 	},
-	Load:function(){
-		LibStrage.load("test", function(value){
-			console.log("Loaded");
+	Load:function(key){
+		LibStrage.load(key, function(value){
+			
 			if(location.pathname == "/www/ChromeAppLogin.html"){
 				// サンドボックスの親の場合は子に通知する
 				var sandbox = document.getElementById("Sandbox").contentWindow;
@@ -124,6 +124,7 @@ var Store = assign({}, EventEmitter.prototype, {
 					option:{values:value}
 				},"*")
 			}else{
+				console.log("Loaded:" + key);
 				_store.savedValues = value;
 				Store.emitChangeSavedData();
 			}
@@ -153,12 +154,13 @@ var Store = assign({}, EventEmitter.prototype, {
 		}
 	},
 	dispatcherIndex: dispatcher.getInstance().register(function(payload) {
+		console.log(payload);
 		switch (payload.actionType) {
 			case "LoadFromSandBox":
-				Store.LoadFromSandBox();
+				Store.LoadFromSandBox(payload.value.key);
 				break;
 			case "Load":
-				Store.Load();
+				Store.Load(payload.value.key);
 			case "SaveFromSandBox":
 				Store.SaveFromSandBox(payload.value.key, payload.value.value);
 				break;
