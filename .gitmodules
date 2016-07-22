@@ -1,0 +1,3 @@
+[submodule "src/js/submodules/ReactLayoutElem"]
+	path = src/js/submodules/ReactLayoutElem
+	url = https://github.com/yambal/ReactLayoutElem.git
