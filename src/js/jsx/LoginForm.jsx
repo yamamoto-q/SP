@@ -7,8 +7,11 @@ var View_Middle = require('./Middle.js');
 
 module.exports = React.createClass({
 	getInitialState: function getInitialState() {
+		var qUsers = Ctrl_QUser.Store.getQUsers();
+		console.log("init");
+		console.log(qUsers);
 		return {
-			qUsers:[]
+			qUsers:qUsers
 		};
 	},
 	componentDidMount: function componentDidMount() {

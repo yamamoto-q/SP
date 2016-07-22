@@ -11,8 +11,11 @@ module.exports = React.createClass({
 	displayName: 'exports',
 
 	getInitialState: function getInitialState() {
+		var qUsers = Ctrl_QUser.Store.getQUsers();
+		console.log("init");
+		console.log(qUsers);
 		return {
-			qUsers: []
+			qUsers: qUsers
 		};
 	},
 	componentDidMount: function componentDidMount() {
