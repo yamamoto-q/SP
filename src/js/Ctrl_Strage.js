@@ -2,6 +2,8 @@ var EventEmitter = require("events").EventEmitter;
 var assign = require("object-assign");
 var Dispatcher = require('flux').Dispatcher;
 
+var LibStrage = require('./Lib_Strage.js');
+
 // Dispatcher をシングルトンで提供
 var dispatcherInstance = null;
 var dispatcher = {
@@ -112,9 +114,7 @@ var Store = assign({}, EventEmitter.prototype, {
 		},"*");
 	},
 	Load:function(){
-		/*
-		chrome.storage.local.get(null,function(items){
-			//console.log(items);
+		LibStrage.load("test", function(value){
 			if(location.pathname == "/www/ChromeAppLogin.html"){
 				// サンドボックスの親の場合は子に通知する
 				var sandbox = document.getElementById("Sandbox").contentWindow;
@@ -127,7 +127,6 @@ var Store = assign({}, EventEmitter.prototype, {
 				Store.emitChangeSavedData();
 			}
 		});
-		*/
 	},
 	SaveFromSandBox:function(key, value){
 		// 親に save 送信

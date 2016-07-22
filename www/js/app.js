@@ -21071,6 +21071,8 @@ var EventEmitter = require("events").EventEmitter;
 var assign = require("object-assign");
 var Dispatcher = require('flux').Dispatcher;
 
+var LibStrage = require('./Lib_Strage.js');
+
 // Dispatcher をシングルトンで提供
 var dispatcherInstance = null;
 var dispatcher = {
@@ -21181,9 +21183,7 @@ var Store = assign({}, EventEmitter.prototype, {
 		},"*");
 	},
 	Load:function(){
-		/*
-		chrome.storage.local.get(null,function(items){
-			//console.log(items);
+		LibStrage.load("test", function(value){
 			if(location.pathname == "/www/ChromeAppLogin.html"){
 				// サンドボックスの親の場合は子に通知する
 				var sandbox = document.getElementById("Sandbox").contentWindow;
@@ -21196,7 +21196,6 @@ var Store = assign({}, EventEmitter.prototype, {
 				Store.emitChangeSavedData();
 			}
 		});
-		*/
 	},
 	SaveFromSandBox:function(key, value){
 		// 親に save 送信
@@ -21242,7 +21241,50 @@ module.exports = {
     Action: Action,
     Store: Store
 }
-},{"events":1,"flux":3,"object-assign":5}],178:[function(require,module,exports){
+},{"./Lib_Strage.js":178,"events":1,"flux":3,"object-assign":5}],178:[function(require,module,exports){
+module.exports = {
+    save: function(key, value, cb) {
+        'use strict';
+        if (typeof chrome !== "undefined") {
+            // Chorome　の場合
+            var saveObj = {};
+            saveObj[key] = value;
+
+            chrome.storage.local.set(saveObj, function() {
+                cb();
+            });
+
+        } else {
+            // Chorome 以外
+            localStorage.setItem(key, JSON.stringify(value));
+            cb();
+        }
+        return;
+    },
+    load: function(key, cb) {
+
+        'use strict';
+        if (typeof chrome !== "undefined") {
+            // Chorome　の場合
+            chrome.storage.local.get(key, function(value) {
+                console.log("load from chrome.storage.local:" + key);
+                if (value && value != {}) {
+                    cb(value[key]);
+                    return;
+                }
+                cb(null);
+            });
+
+        } else {
+            // Chorome 以外
+            var value = localStorage.getItem(key);
+            cb(JSON.parse(value));
+        }
+        return;
+    }
+};
+
+},{}],179:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -21275,7 +21317,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"react":175}],179:[function(require,module,exports){
+},{"react":175}],180:[function(require,module,exports){
 var _context, _credentials, _QUser;
 
 function _authentication(context, email, password, successCallBack, failCallback) {
@@ -21311,7 +21353,7 @@ module.exports = {
     }
 }
 
-},{}],180:[function(require,module,exports){
+},{}],181:[function(require,module,exports){
 'use strict';
 
 if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
@@ -21349,7 +21391,7 @@ function onDeviceReady() {
     });
 }
 
-},{"./View_SmartQApp.js":182,"react":175,"react-dom":7}],181:[function(require,module,exports){
+},{"./View_SmartQApp.js":183,"react":175,"react-dom":7}],182:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -21399,7 +21441,7 @@ module.exports = React.createClass({
 	}
 });
 
-},{"./Ctrl_QUser.js":176,"./Middle.js":178,"./QUser.js":179,"react":175}],182:[function(require,module,exports){
+},{"./Ctrl_QUser.js":176,"./Middle.js":179,"./QUser.js":180,"react":175}],183:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -21418,4 +21460,4 @@ module.exports = React.createClass({
 	}
 });
 
-},{"./View_LoginForm.js":181,"react":175}]},{},[180]);
+},{"./View_LoginForm.js":182,"react":175}]},{},[181]);
