@@ -20,7 +20,7 @@ module.exports = {
     load: function(key, cb) {
 
         'use strict';
-        if (typeof chrome !== "undefined" && typeof chrome.storage !== "undefined" && typeof chrome.storage.local !== "undefined") {
+        if (typeof chrome !== "undefined" && typeof chrome.storage !== "undefined") {
             // Chorome　の場合
             chrome.storage.local.get(key, function(value) {
                 console.log("load from chrome.storage.local:" + key);
