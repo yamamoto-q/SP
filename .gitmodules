@@ -4,6 +4,3 @@
 [submodule "src/js/submodules/Questetra"]
 	path = src/js/submodules/Questetra
 	url = https://github.com/yamamoto-q/Questetra.git
-[submodule "src/js/submodules/WebAppLib"]
-	path = src/js/submodules/WebAppLib
-	url = https://yambal:p1490062@github.com/yambal/WebAppLib.git
