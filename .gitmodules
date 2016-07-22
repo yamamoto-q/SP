@@ -1,3 +1,6 @@
 [submodule "src/js/submodules/ReactLayoutElem"]
 	path = src/js/submodules/ReactLayoutElem
 	url = https://github.com/yambal/ReactLayoutElem.git
+[submodule "src/js/submodules/Questetra"]
+	path = src/js/submodules/Questetra
+	url = https://github.com/yamamoto-q/Questetra.git
