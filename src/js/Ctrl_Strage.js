@@ -115,6 +115,7 @@ var Store = assign({}, EventEmitter.prototype, {
 	},
 	Load:function(){
 		LibStrage.load("test", function(value){
+			console.log("Loaded");
 			if(location.pathname == "/www/ChromeAppLogin.html"){
 				// サンドボックスの親の場合は子に通知する
 				var sandbox = document.getElementById("Sandbox").contentWindow;
